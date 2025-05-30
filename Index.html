@@ -1,2 +1,91 @@
-<h1 style ="display:flex; flex-wrap; justify-content: center;">All of the reasons why Robert Hastings is the best cumsack!</h1>
-<h1 style="">Robert Hastings Feeding Simulator</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Robert Hastings Clicking Simulator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    #clickButton {
+      font-size: 2em;
+      padding: 20px 40px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    #clickButton:hover {
+      background-color: #45a049;
+    }
+    #counter {
+      font-size: 2em;
+      margin-top: 20px;
+    }
+    #upgrade {
+      margin-top: 30px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #2196F3;
+      border: none;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #upgrade:disabled {
+      background-color: #777;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Robert Hastings Clicking Simulator</h1>
+  <button id="clickButton">Click Robert!</button>
+  <div id="counter">Clicks: 0</div>
+
+  <button id="upgrade" disabled>Upgrade (+1 per click) - Cost: 50</button>
+
+  <script>
+    let clicks = 0;
+    let clickPower = 1;
+    let upgradeCost = 50;
+
+    const counter = document.getElementById("counter");
+    const clickButton = document.getElementById("clickButton");
+    const upgradeButton = document.getElementById("upgrade");
+
+    clickButton.onclick = () => {
+      clicks += clickPower;
+      updateUI();
+    };
+
+    upgradeButton.onclick = () => {
+      if (clicks >= upgradeCost) {
+        clicks -= upgradeCost;
+        clickPower++;
+        upgradeCost = Math.floor(upgradeCost * 1.5);
+        upgradeButton.textContent = `Upgrade (+${clickPower} per click) - Cost: ${upgradeCost}`;
+        updateUI();
+      }
+    };
+
+    function updateUI() {
+      counter.textContent = `Clicks: ${clicks}`;
+      upgradeButton.disabled = clicks < upgradeCost;
+    }
+  </script>
+
+</body>
+</html>
+
